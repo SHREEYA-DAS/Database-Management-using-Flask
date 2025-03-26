@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Profile</h2>
+<form method="POST">
+    <div class="form-group">
+        <input type="text" name="username" class="form-control" value="{{ current_user.username }}" required>
+    </div>
+    <div class="form-group">
+        <input type="email" name="email" class="form-control" value="{{ current_user.email }}" required>
+    </div>
+    <div class="form-group">
+        <input type="password" name="password" class="form-control" placeholder="New Password (leave blank to keep current)">
+    </div>
+    <button type="submit" class="btn btn-primary">Update Profile</button>
+</form>
+{% endblock %}

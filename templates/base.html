@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #121212;
+            color: #e0e0e0;
+        }
+    
+        /* Navbar */
+        .navbar {
+            background-color: #121212;
+            padding: 15px;
+        }
+    
+        .navbar-brand {
+            color: #ffd400 !important;
+            font-weight: 600;
+            font-size: 20px;
+        }
+    
+        .nav-link {
+            padding: 8px 15px !important;
+            border-radius: 25px;
+            transition: all 0.3s ease-in-out;
+            font-weight: 700;
+        }
+    
+        .nav-item .nav-link {
+            color: #121212 !important; 
+            background-color: rgba(255, 255, 255, 0.15);
+            margin: 5px;
+            border-radius: 25px; 
+        }
+    
+        .nav-item .nav-link:hover {
+            background-color: #ffd400;  
+            color: #121212 !important;  
+        }
+
+        .container-box {
+            max-width: 500px;
+            margin: 50px auto;
+            background: #1e1e1e;  
+            padding: 30px;
+            border-radius: 25px;  
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            color: #ffd400;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Buttons */
+        .btn-custom {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease-in-out;
+            border-radius: 25px;
+        }
+
+        .btn-primary {
+            background-color: #ffd400;
+            border: none;
+            color: black;
+        }
+
+        .btn-primary:hover {
+            background-color: #d4b102;
+        }
+
+        .btn-outline-primary {
+            border-color: #ffd400;  /* Yellow outline */
+            color: #ffd400;         /* Yellow text */
+        }
+
+        .btn-outline-primary:hover {
+            background-color: #ffd400;  /* Yellow background on hover */
+            color: black;               /* Black text on hover */
+        }
+        a {
+            color: black;  /* Change the color of all <a> tags to black */
+            text-decoration: none;  /* Optional: Remove underline from links */
+        }
+        
+        a:hover {
+            color: #ffd400;  /* Change color on hover to yellow */
+        }
+
+        .grade-value {
+            font-size: 18px;  /* Larger font size for grades */
+            color: #ffd400;   /* Yellow color for grades */
+        }
+
+        /* Placeholder text color */
+::placeholder {
+    color: #b0b0b0;  /* Light gray color for placeholder text */
+    opacity: 1;      /* Ensures the placeholder is fully opaque */
+}
+
+.form-control::placeholder {
+    color: #b0b0b0;  /* Light gray color for placeholder text in form controls */
+    opacity: 1;      /* Ensures the placeholder is fully opaque */
+}
+
+        /* Forms */
+        .form-control {
+            border-radius: 25px;
+            padding: 12px;
+            font-size: 14px;
+            background-color: #2a2a2a;  /* Dark background for inputs */
+            color: #e0e0e0;              /* Light text for inputs */
+            border: 1px solid #ffd400;   /* Yellow border */
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .nav-item .nav-link.logout {
+            background-color: #520007;  /* Light red background */
+            color: #ff0000;  /* Red text */
+        }
+    
+        .nav-item .nav-link.logout:hover {
+            background-color: #ff0000;  /* Red background on hover */
+            color: white;                /* White text on hover */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('home') }}">Flask User Authentication</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    {% if current_user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('profile') }}">Profile</a></li>
+                        <li class="nav-item"><a class="nav-link logout" href="{{ url_for('logout') }}">Logout</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('register') }}">Register</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-box">
+        {% block content %}{% endblock %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
